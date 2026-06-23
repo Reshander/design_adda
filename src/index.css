@@ -1,0 +1,201 @@
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap");
+@import "tailwindcss";
+@config "../tailwind.config.cjs";
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  body {
+    @apply bg-obsidian text-white;
+    font-family: "Satoshi", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: #ffffff;
+    color: #050505;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: width 0.25s ease, height 0.25s ease, transform 0.08s ease-out;
+  will-change: transform;
+}
+.custom-cursor.is-hover {
+  width: 64px;
+  height: 64px;
+  background: #ffffff;
+}
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor { display: none; }
+  body { cursor: auto; }
+}
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, input, textarea, select { cursor: none; }
+}
+
+/* Text utilities */
+.font-display { font-family: "Clash Display", sans-serif; letter-spacing: -0.02em; }
+.font-sans { font-family: "Satoshi", system-ui, sans-serif; }
+.text-balance { text-wrap: balance; }
+
+.stroke-text {
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.6);
+  color: transparent;
+}
+.stroke-text-dark {
+  -webkit-text-stroke: 1.5px rgba(0,0,0,0.6);
+  color: transparent;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.glass-light {
+  background: rgba(0, 0, 0, 0.025);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
+.gradient-radial {
+  background: radial-gradient(ellipse at top, rgba(255,255,255,0.08), transparent 60%);
+}
+
+/* Hide scrollbar for horizontal scroll containers */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Form input bottom border style */
+.minimal-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  outline: none;
+  width: 100%;
+  padding: 14px 0;
+  font-family: "Satoshi", sans-serif;
+  font-size: 17px;
+  color: #ffffff;
+  transition: border-color 0.3s ease;
+}
+.minimal-input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+.minimal-input:focus {
+  border-bottom-color: #ffffff;
+}
+.minimal-input:hover {
+  border-bottom-color: rgba(255,255,255,0.4);
+}
+
+/* Animated underline link */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+[data-debug-wrapper="true"] { display: contents !important; }
